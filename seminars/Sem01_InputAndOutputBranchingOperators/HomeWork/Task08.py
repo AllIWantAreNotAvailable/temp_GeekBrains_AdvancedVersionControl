@@ -50,7 +50,8 @@ def main() -> None:
     :return: None.
     """
     chocolate_width, chocolate_length, pieces = user_input()
-    condition = pieces % chocolate_width == 0 or pieces % chocolate_length == 0
+    chocolate_pieces = chocolate_width * chocolate_length
+    condition = 0 < pieces < chocolate_pieces and (pieces % chocolate_width == 0 or pieces % chocolate_length == 0)
     print(f'От шоколадки шириной {chocolate_width} кусочков и длиной {chocolate_length} кусочков',
           f'{"можно".upper() if condition else "нельзя".upper()} отломить {pieces} кусочков за один разлом')
 
