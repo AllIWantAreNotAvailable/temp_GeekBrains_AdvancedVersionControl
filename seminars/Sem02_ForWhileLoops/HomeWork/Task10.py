@@ -5,14 +5,43 @@
 
 Например:
 Input:
-5 -> 1 0 1 1 0 2
+5 -> 1 0 1 1 0
 Output:
 2
 """
+from random import randint
 
 
-def main():
-    pass
+def user_input() -> int:
+    """ Функция обрабатывает ввод пользователя, если введенные данные не удалось преобразовать к числу, либо
+    преобразованное число меньше 0, будет вызван рекуррентный случай.
+
+    :return: Возвращает только натуральные числа и 0, <class 'int'>
+    """
+    coins = input('Сколько монет на столе?\n>>> ')
+    if coins.isdigit():
+        return int(coins)
+    else:
+        print('Допускается ввод только натуральных чисел и 0. Повторите ввод.')
+        return user_input()
+
+
+def main() -> None:
+    """ Главная функция.
+
+    Ввод пользователя вынесен в отдельный метод для валидации вводимых данных. Основная логика вычислений
+    находится в Главной функции.
+
+    :return: None
+    """
+    coins_count = user_input()
+    if coins_count == 0:
+        print('На столе нет монет... ;-(')
+        return
+    coins = [randint(0, 1) for _ in range(coins_count)]
+    heads, tails = coins.count(0), coins.count(1)
+    print(', '.join(['(Орёл)' if x else '(Решка)' for x in coins]), end=' ->\n')
+    print(f'-> В данном случае достаточно перевернуть {heads if heads < tails else tails} монет.')
 
 
 if __name__ == '__main__':
