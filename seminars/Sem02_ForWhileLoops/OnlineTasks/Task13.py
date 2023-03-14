@@ -25,9 +25,9 @@ current_length = 0
 for day in observation_history:
     if 0 < day:
         current_length += 1
-    else:
         if longest_thaw < current_length:
             longest_thaw = current_length
+    else:
         current_length = 0
 pretty_text = "\t;\n".join([f"{x[0]}\t|\t{x[1]}" for x in enumerate(observation_history, 1)])
 print('Анализируемый период, день | температура:\n'
