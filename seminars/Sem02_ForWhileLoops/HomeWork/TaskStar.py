@@ -6,7 +6,7 @@
 """
 
 
-def solve_expression(sequence: tuple, expression: str = '') -> list:
+def solve_expression(sequence: tuple, expression: str = '') -> None:
     if len(sequence) == 1:
         expression += f'{sequence[0]}'
         if eval(expression) == 100:
