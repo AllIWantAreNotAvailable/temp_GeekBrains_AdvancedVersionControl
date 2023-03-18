@@ -54,7 +54,7 @@ def get_value_close_to_desired(list_of_values: list, looking_for: int) -> tuple:
 	elif bigger <= looking_for:
 		return bigger,
 	
-	for index in range(1, len(sorted_values[1:])):
+	for index in range(1, len(sorted_values)):
 		current = sorted_values[index]
 	
 		if current == looking_for:

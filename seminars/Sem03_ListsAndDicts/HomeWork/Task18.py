@@ -29,7 +29,7 @@ def get_value_close_to_desired(list_of_values: list, looking_for: int) -> tuple:
     elif bigger <= looking_for:
         return bigger,
 
-    for index in range(1, len(sorted_values[1:])):
+    for index in range(1, len(sorted_values)):
 
         current = sorted_values[index]
 
@@ -101,10 +101,8 @@ def main() -> None:
 
     :return: None
     """
-    # length_of_list,  desired_value = get_user_values()
-    # list_of_randint = get_list_of_values(length_of_list)
-    list_of_randint = [x for x in range(1, 29, 4)]
-    desired_value = int(input('>>> '))
+    length_of_list,  desired_value = get_user_values()
+    list_of_randint = get_list_of_values(length_of_list)
     values = get_value_close_to_desired(list_of_randint, desired_value)
     temp_text = 'Наиболее близкое(ие) по величине: '
     print(sorted(list_of_randint), f'\nСамое близкое значение к "{desired_value}" ->',
