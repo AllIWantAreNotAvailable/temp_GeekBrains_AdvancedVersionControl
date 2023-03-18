@@ -14,13 +14,12 @@ Output:
 
 
 def get_numbers(sum_of_numbers: int, product_of_numbers: int) -> tuple:
-    first_temp, second_temp = 0, sum_of_numbers
+    temp = sum_of_numbers
 
-    while first_temp + second_temp == sum_of_numbers and first_temp * second_temp != product_of_numbers:
-        first_temp += 1
-        second_temp -= 1
+    while temp * (sum_of_numbers - temp) != product_of_numbers:
+        temp -= 1
 
-    return first_temp, second_temp
+    return temp, sum_of_numbers - temp
 
 
 def is_input_valid(product_of_numbers, sum_of_numbers):
