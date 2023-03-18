@@ -1,5 +1,5 @@
 """Задача №18:
-Требуется найти в массиве A[1...N] самый близкий по величине элемент к заданному числу X. Пользователь
+Требуется найти в массиве A[1...N] самый близкий по величине элемент к заданному числу X. Пользователь
  в первой строке вводит натуральное число N – количество элементов в массиве. В последующих строках записаны
 N целых чисел Ai. Последняя строка содержит число X
 
@@ -10,28 +10,53 @@ N целых чисел Ai. Последняя строка содержит ч�
 """
 
 
-def get_value_close_to_desired(list_of_values: list, searching_value: int) -> int:
-    """ Возвращает значение наиболее близкое или равное переданному (searching_value) из списка (list_of_values).
+from random import randint
+
+
+def get_value_close_to_desired(list_of_values: list, searching_value: int) -> tuple:
+    """ Возвращает значения наиболее близкое или равное переданному (searching_value) из списка (list_of_values).
 
     :param list_of_values: Список значений, в котором ведется поиск, <class 'list'>.
     :param searching_value: Значение, которое ищем в списке, <class 'list'>.
-    :return: Значение наиболее близкое к искомому, <class 'int'>.
+    :return: Значения наиболее близкое к искомому, <class 'tuple'>.
     """
-    value = 0  # Будет 100% работать только с данным условием задачи -> [1...N]
-    for el in list_of_values:
-        if value < el <= searching_value:
-            value = el
-    return value
+    sorted_values = sorted(list_of_values)
+    nearest_lower = sorted_values[0]
+    nearest_bigger = sorted_values[-1]
+
+    if searching_value < nearest_lower:
+        return nearest_lower,
+    elif nearest_bigger < searching_value:
+        return nearest_bigger,
+
+    for index in range(1, len(sorted_values[1:-1])):
+        current_element = sorted_values[index]
+
+        if current_element == searching_value:
+            return current_element,
+        if nearest_lower < current_element < searching_value:
+            nearest_lower = current_element
+        if searching_value < current_element < nearest_bigger:
+            nearest_bigger = current_element
+
+    if abs(nearest_lower - searching_value) < abs(nearest_bigger - searching_value):
+        return nearest_lower,
+    elif abs(nearest_lower - searching_value) > abs(nearest_bigger - searching_value):
+        return nearest_bigger,
+    else:
+        return nearest_lower, nearest_bigger
 
 
-def get_list_of_values(length: int, min_value: int = 1) -> list:
-    """ Возвращает числовой ряд (список) от min_value до length включительно.
+def get_list_of_values(upper_bound: int, min_value: int = -10, max_value: int = 10) -> list:
+    """ Инициализирует и возвращает список длинной upper_bound заполненный
+    случайными целыми числами от min_value до max_value.
 
-    :param length: Длина списка, <class 'int'>
-    :param min_value: Первое значение в списке, <class 'int'>
-    :return: Список значений [min_value...length], <class 'int'>
+    :param upper_bound: Длина генерируемого списка, <class 'int'>.
+    :param min_value: Минимальное значение для заполнения списка, <class 'int'>.
+    :param max_value: Максимальное значение для заполнения списка, <class 'int'>.
+    :return: Список заполненный случайными целыми числами,<class 'list'>.
     """
-    return [x for x in range(min_value, length + 1)]
+    return [randint(min_value, max_value) for _ in range(upper_bound)]
 
 
 def get_user_values(list_length=None, search_value=None) -> tuple:
@@ -78,8 +103,10 @@ def main() -> None:
     """
     length_of_list,  desired_value = get_user_values()
     list_of_randint = get_list_of_values(length_of_list)
-    print(list_of_randint, f'\nСамое близкое значение к "{desired_value}" ->',
-          get_value_close_to_desired(list_of_randint, desired_value))
+    values = get_value_close_to_desired(list_of_randint, desired_value)
+    temp_text = 'Наиболее близкое(ие) по величине: '
+    print(sorted(list_of_randint), f'\nСамое близкое значение к "{desired_value}" ->',
+          f'{temp_text}{values[0]}' if len(values) == 1 else f'{temp_text} {values[0]} и {values[1]}')
 
 
 if __name__ == '__main__':
