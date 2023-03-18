@@ -24,20 +24,16 @@ def get_value_close_to_desired(list_of_values: list, searching_value: int) -> tu
     nearest_lower = sorted_values[0]
     nearest_bigger = sorted_values[-1]
 
-    if searching_value < nearest_lower:
-        return nearest_lower,
-    elif nearest_bigger < searching_value:
-        return nearest_bigger,
+    if nearest_lower < searching_value < nearest_bigger:
+        for index in range(1, len(sorted_values[1:-1])):
+            current_element = sorted_values[index]
 
-    for index in range(1, len(sorted_values[1:-1])):
-        current_element = sorted_values[index]
-
-        if current_element == searching_value:
-            return current_element,
-        if nearest_lower < current_element < searching_value:
-            nearest_lower = current_element
-        if searching_value < current_element < nearest_bigger:
-            nearest_bigger = current_element
+            if current_element == searching_value:
+                return current_element,
+            if nearest_lower < current_element < searching_value:
+                nearest_lower = current_element
+            if searching_value < current_element < nearest_bigger:
+                nearest_bigger = current_element
 
     if abs(nearest_lower - searching_value) < abs(nearest_bigger - searching_value):
         return nearest_lower,

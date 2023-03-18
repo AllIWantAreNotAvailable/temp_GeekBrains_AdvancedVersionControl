@@ -11,5 +11,5 @@ Output:
 """
 
 array = [0, -1, 5, 2, 3]
-print(f'В массиве:\n{array}\n{sum([1 for x in range(1, len(array)) if array[x-1] < array[x]])} '
-      f'элемента больше предыдущего.')
+counter_list = [1 for x in range(1, len(array)) if array[x - 1] < array[x]]
+print(f'В массиве:\n{array}\n{sum(counter_list)} элемента больше предыдущего.')
