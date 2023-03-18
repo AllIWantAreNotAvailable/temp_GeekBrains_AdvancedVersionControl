@@ -10,6 +10,10 @@
 """
 
 
+def str_to_list(string: str):
+    return sorted(x for x in string if string.isalnum())
+
+
 def is_anagram(first: str, second: str) -> bool:
     """ Проверяет утверждение: "Переданные строки являются анаграммами".
 
@@ -25,16 +29,13 @@ def is_anagram(first: str, second: str) -> bool:
     :param second: Вторая строка для сравнения, <class 'str'>
     :return: Истинность утверждения: "Переданные строки являются анаграммами"; <class 'bool'>
     """
-    first = [x for x in first if first.isalnum()]
-    second = [x for x in second if second.isalnum()]
+    first, second = str_to_list(first), str_to_list(second)
     first_length = len(first)
     flag = first_length == len(second)
     if flag:
         for index in range(first_length):
-            first_element = first[index]
-            second_element = second[index]
-            if first_element.upper() != second_element.upper():
-                flag = not first
+            if first[index].upper() != second[index].upper():
+                flag = not flag
                 break
     return flag
 
@@ -44,10 +45,10 @@ def main() -> None:
 
     :return: None
     """
-    confirmation_check = is_anagram(first=input('Введите первую строку (выражение)\n>>> '),
-                                    second=input('Введите вторую строку (выражение)\n>>> '))
+    check = is_anagram(first=input('Введите первую строку (выражение)\n>>> '),
+                       second=input('Введите вторую строку (выражение)\n>>> '))
 
-    print(f'Это {"" if confirmation_check else "не "}анаграммы!')
+    print(f'Это {"" if check else "не "}анаграммы!')
 
 
 if __name__ == '__main__':

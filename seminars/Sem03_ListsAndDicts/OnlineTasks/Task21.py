@@ -28,7 +28,7 @@ list_of_dicts = [
                 ]
 
 values = list(map(lambda el: tuple(el.values())[0], list_of_dicts))
+unique_values = [x for x in values if values.count(x) == 1]
 
 print('Значения без повторений ->', set(values))
-print('Уникальные значения ->', [x for x in values if values.count(x) == 1])
-
+print('Уникальные значения ->', unique_values)

@@ -13,34 +13,38 @@ N целых чисел Ai. Последняя строка содержит ч�
 from random import randint
 
 
-def get_value_close_to_desired(list_of_values: list, searching_value: int) -> tuple:
+def get_value_close_to_desired(list_of_values: list, looking_for: int) -> tuple:
     """ Возвращает значения наиболее близкое или равное переданному (searching_value) из списка (list_of_values).
 
     :param list_of_values: Список значений, в котором ведется поиск, <class 'list'>.
-    :param searching_value: Значение, которое ищем в списке, <class 'list'>.
+    :param looking_for: Значение, которое ищем в списке, <class 'list'>.
     :return: Значения наиболее близкое к искомому, <class 'tuple'>.
     """
     sorted_values = sorted(list_of_values)
-    nearest_lower = sorted_values[0]
-    nearest_bigger = sorted_values[-1]
+    lower = sorted_values[0]
+    bigger = sorted_values[-1]
 
-    if nearest_lower < searching_value < nearest_bigger:
-        for index in range(1, len(sorted_values[1:-1])):
-            current_element = sorted_values[index]
+    if looking_for <= lower:
+        return lower,
+    elif bigger <= looking_for:
+        return bigger,
 
-            if current_element == searching_value:
-                return current_element,
-            if nearest_lower < current_element < searching_value:
-                nearest_lower = current_element
-            if searching_value < current_element < nearest_bigger:
-                nearest_bigger = current_element
+    for index in range(1, len(sorted_values[1:])):
 
-    if abs(nearest_lower - searching_value) < abs(nearest_bigger - searching_value):
-        return nearest_lower,
-    elif abs(nearest_lower - searching_value) > abs(nearest_bigger - searching_value):
-        return nearest_bigger,
-    else:
-        return nearest_lower, nearest_bigger
+        current = sorted_values[index]
+
+        if current == looking_for:
+            return current,
+        elif current < looking_for:
+            continue
+
+        previous = sorted_values[index - 1]
+        if abs(previous - looking_for) < abs(current - looking_for):
+            return previous,
+        elif abs(previous - looking_for) == abs(current - looking_for):
+            return previous, current
+        else:
+            return current,
 
 
 def get_list_of_values(upper_bound: int, min_value: int = -10, max_value: int = 10) -> list:
@@ -97,8 +101,10 @@ def main() -> None:
 
     :return: None
     """
-    length_of_list,  desired_value = get_user_values()
-    list_of_randint = get_list_of_values(length_of_list)
+    # length_of_list,  desired_value = get_user_values()
+    # list_of_randint = get_list_of_values(length_of_list)
+    list_of_randint = [x for x in range(1, 29, 4)]
+    desired_value = int(input('>>> '))
     values = get_value_close_to_desired(list_of_randint, desired_value)
     temp_text = 'Наиболее близкое(ие) по величине: '
     print(sorted(list_of_randint), f'\nСамое близкое значение к "{desired_value}" ->',

@@ -14,4 +14,5 @@ from random import randint
 
 
 values_list = [1, 1, 2, 0, -1, 3, 4, 4]
-print(f'В списке:\n{values_list}\nвстречается {len(set(values_list))} разных значений')
+without_duplication = set(values_list)
+print(f'В списке:\n{values_list}\nвстречается {len(without_duplication)} разных значений')

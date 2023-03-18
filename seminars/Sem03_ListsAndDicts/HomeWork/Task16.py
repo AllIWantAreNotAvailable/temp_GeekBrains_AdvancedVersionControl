@@ -20,7 +20,7 @@ def get_count_value_in_list(list_of_values: list, value) -> int:
     :param value: Искомое значение, <class 'int'>.
     :return: Сколько раз значение встретилось в списке, <class 'int'>.
     """
-    return sum([1 for _ in list_of_values if _ == value])
+    return list_of_values.count(value)
 
 
 def get_list_of_values(upper_bound: int, min_value: int = 0, max_value: int = 9) -> list:

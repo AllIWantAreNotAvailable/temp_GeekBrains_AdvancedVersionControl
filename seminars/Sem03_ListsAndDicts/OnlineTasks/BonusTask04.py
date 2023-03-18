@@ -14,15 +14,11 @@ def using_dict(source: str) -> None:
 
     count_dict = {}
     stack = []
-    for el in source:
-        if not el.isalnum():
-            continue
-        elif el not in count_dict:
-            count_dict[el] = 0
-            stack.append(el)
-            continue
-        count_dict[el] += 1
-        stack.append(f'{el}_{count_dict[el]}')
+    for index in range(len(source)):
+        el = source[index]
+        if el.isalnum():
+            count_dict[el] = source[:index].count(el)
+            stack.append(el if not count_dict[el] else f'{el}_{count_dict[el]}')
 
     print('From using_dict\t->', ' '.join(stack))
 
@@ -35,7 +31,7 @@ def using_str(sequence: str):
         if not char.isalnum():
             continue
         counter = sequence[:index].count(char)
-        stack.append(char if counter == 0 else f'{char}_{counter}')
+        stack.append(char if not counter else f'{char}_{counter}')
     print('From using_str\t->', ' '.join(stack))
 
 
