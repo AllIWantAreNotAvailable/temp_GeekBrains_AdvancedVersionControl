@@ -185,6 +185,9 @@ fabric.properties
 .idea
 
 # ===========================================
+# Test files
+test.py
+
 # DS_Store
 .DS_Store
 
