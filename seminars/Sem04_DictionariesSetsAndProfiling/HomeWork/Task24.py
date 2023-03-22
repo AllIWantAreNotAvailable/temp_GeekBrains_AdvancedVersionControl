@@ -23,6 +23,7 @@ from random import randint
 
 
 bushes = [randint(1, 10) for _ in range(0, 4)]
-berry_harvested = list(map(lambda bush: sum(bushes[bush:bush+3]), range(0, len(bushes))))
+round_seedbed = bushes + bushes[:2]
+berry_harvested = list(map(lambda bush: sum(round_seedbed[bush:bush+3]), range(0, len(round_seedbed))))
 max_berries = max(berry_harvested)
 print(bushes, '->', max_berries)
