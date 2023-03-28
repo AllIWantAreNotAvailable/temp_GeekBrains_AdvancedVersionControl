@@ -5,7 +5,7 @@
 
 > ***PSS:*** Буду рад оставленным комментариям и замечаниям по представленным решениям.
 
-- [**Задача №26**]():
+- [**Задача №26**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem05_RecursionAndAlgorithms/HomeWork/Task26.py):
 
 Комментарии к задаче:
 > Написана рекурсивная функция с 2-мя параметрами, параметр 'base' статичен, а 'exponent' уменьшается на 1 в каждом следующем рекуррентном вызове, пока не достигнет значения 0 или 1.
@@ -28,7 +28,7 @@ def get_number_to_power(base: int, exponent: int) -> int:
 ```
 
 
-- [**Задача №28**]():
+- [**Задача №28**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem05_RecursionAndAlgorithms/HomeWork/Task28.py):
 
 Комментарии к задаче:
 > Написана рекурсивная функция с 2-мя параметрами. При решении соблюдено условие ограничения операций (+-1).
@@ -52,7 +52,7 @@ def get_sum_recursion(first_summand: int, second_summand: int) -> int:
 ```
 
 
-- [**Задача со звёздочкой №5**]():
+- [**Задача со звёздочкой №5**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem05_RecursionAndAlgorithms/HomeWork/TaskStar05.py):
 
 Комментарии к задаче:
 > 2 цикла while: первый отвечает за ввод последовательности и останавливается при введенном 0; второй, удаляет из копии списка все максимальные элементы исходного.
@@ -86,7 +86,7 @@ def get_second_biggest_number() -> tuple:
 ```
 
 
-- [**Задача со звёздочкой №6**]():
+- [**Задача со звёздочкой №6**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem05_RecursionAndAlgorithms/HomeWork/TaskStar06.py):
 
 Комментарии к задаче:
 > Думаю, тут комментарии излишне: берем диапазон k-значных чисел, последовательно перебираем все и проверяем, равна ли сумма цифр очередного элемента искомой S.
