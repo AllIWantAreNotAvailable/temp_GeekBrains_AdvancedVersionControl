@@ -154,62 +154,12 @@ def get_hundreds(number: int) -> tuple:
     return 'hundreds', temp, temp * hundred
 
 
-def get_thousands(number: int) -> tuple:
-    """ Данная функция используется для формирования словаря функцией get_number_structure().
-
-    :param number:  Число от 1 до 999 999 999 999, <class 'int'>.
-    :return: Кортеж состоящий из ('ключ словаря' 'кол-во тысяч' 'число тысяч'), <class 'tuple'>.
-    """
-    thousand = 1_000
-    temp = number // thousand % 1_000
-    return 'thousands', temp, temp * thousand
-
-
-def get_millions(number: int) -> tuple:
-    """ Данная функция используется для формирования словаря функцией get_number_structure().
-
-    :param number:  Число от 1 до 999 999 999 999, <class 'int'>
-    :return: Кортеж состоящий из ('ключ словаря' 'кол-во миллионов' 'число миллионов'), <class 'tuple'>.
-    """
-    million = 1_000_000
-    temp = number // million % 1_000
-    return 'millions', temp, temp * million
-
-
-def get_billions(number: int) -> tuple:
-    """ Данная функция используется для формирования словаря функцией get_number_structure().
-
-    :param number:  Число от 1 до 999 999 999 999, <class 'int'>.
-    :return: Кортеж состоящий из ('ключ словаря' 'кол-во миллиардов' 'число миллиардов'), <class 'tuple'>.
-    """
-    billion = 1_000_000_000
-    temp = number // billion % 1_000
-    return 'billion', temp, temp * billion
-
-
 def get_number_structure(number: int) -> dict:
-    """ Функция раскладывает число на разряды и формирует словарь разрядов числа вида:
 
-    - миллиарды – кол-во миллиардов, число миллиардов;
-    - миллионы – кол-во миллионов, число миллионов;
-    - тысячи – кол-во тысяч, число тысяч;
-    - сотни – кол-во сотен, число сотен;
-    - десятки - кол-во десятков, число десятков;
-    - единицы – кол-во единиц, число единиц.
-
-    Исключение: "Если число заканчивается на числа [11, 12, ... 18, 19], то 'единицы' будут удалены из словаря. Вместо
-    'единиц' будет добавлен элемент 'десятки_исключение – кол-во единиц, число десятков'".
-
-    :param number: Число от 1 до 999 999 999 999, <class 'int'>.
-    :return: Словарь разрядов, <class 'dict'>.
-    """
     functions = [
-        get_billions,
-        get_millions,
-        get_thousands,
-        get_hundreds,
+        get_ones,
         get_tens,
-        get_ones
+        get_hundreds
     ]
     structure = dict()
 
@@ -219,7 +169,7 @@ def get_number_structure(number: int) -> dict:
         if key == 'ones' and 'tens_ex' in structure:
             continue
 
-        if is_zero_value(value):
+        if is_zero_value(value):  # Возможно это рудимент...
             structure[key] = (count, value)
 
     return structure
@@ -246,6 +196,10 @@ def get_number_from_user() -> int:
         print(ex, 'Повторите ввод.')
         return get_number_from_user()
     return user_number
+
+
+def divide_number_into_groups_of_digits(number: int) -> tuple:
+    groups = ('hundreds', 'thousands', 'millions', 'billions')
 
 
 def main() -> None:

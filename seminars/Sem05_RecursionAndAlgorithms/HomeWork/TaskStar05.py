@@ -29,10 +29,9 @@ def get_second_biggest_number() -> tuple:
     first_biggest_index = max(sequence)
     temp_sequence = sequence[:]
     while first_biggest_index in temp_sequence:
-        index = temp_sequence.index(first_biggest_index)
-        temp_sequence.pop(index)
+        temp_sequence.remove(first_biggest_index)
 
-    return sequence, max(temp_sequence)
+    return *sequence, max(temp_sequence)
 
 
 def main():
@@ -40,7 +39,7 @@ def main():
 
     :return: None.
     """
-    sequence, second_biggest = get_second_biggest_number()
+    *sequence, second_biggest = get_second_biggest_number()
     print(f'Второе по величине число в последовательности {sequence} -> {second_biggest}')
 
 
