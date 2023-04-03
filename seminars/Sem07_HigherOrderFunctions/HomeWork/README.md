@@ -5,31 +5,31 @@
 
 > ***PSS:*** Буду рад оставленным комментариям и замечаниям по представленным решениям.
 
-- [**Задача №34**]():
+- [**Задача №34**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem07_HigherOrderFunctions/HomeWork/Task34.py):
 
 Комментарии к задаче:
 
 
 
-- [**Задача №36**]():
+- [**Задача №36**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem07_HigherOrderFunctions/HomeWork/Task36.py):
 
 Комментарии к задаче:
 
 
 
-- [**Задача со звёздочкой №9**]():
+- [**Задача со звёздочкой №9**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem07_HigherOrderFunctions/HomeWork/TaskStar09.py):
 
 Комментарии к задаче:
 
 
 
-- [**Задача со звёздочкой №10 (В1)**]():
+- [**Задача со звёздочкой №10 (В1)**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem07_HigherOrderFunctions/HomeWork/TaskStar10_EchoBot.py):
 
 Комментарии к задаче:
 
 
 
-- [**Задача со звёздочкой №10 (В2)**]():
+- [**Задача со звёздочкой №10 (В2)**](https://github.com/AllIWantIsNotAvailable/GeekBrains_IntroductionToPython/blob/main/seminars/Sem07_HigherOrderFunctions/HomeWork/TaskStar10_WikiBot.py):
 
 Комментарии к задаче:
 
