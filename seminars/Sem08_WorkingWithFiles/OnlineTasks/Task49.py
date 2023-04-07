@@ -12,6 +12,11 @@ import json
 
 
 def find_contact(contacts: list) -> None:
+    """ Функция осуществляет поиск по справочнику и выводит найденные записи на экран.
+
+    :param contacts: Справочник, <class 'list'>.
+    :return: None
+    """
     what = input('Кого ищем?\n>>> ')
     found = list(filter(lambda el: what in el['first_name'] or what in el['second_name'], contacts))
     if found:
@@ -21,10 +26,19 @@ def find_contact(contacts: list) -> None:
 
 
 def file_path(file_name='contact_list') -> str:
+    """ Функция возвращает путь к файлу справочника.
+
+    :param file_name: Имя файла справочника, <class 'str'>.
+    :return: Путь к файлу справочника, <class 'str'>.
+    """
     return os.path.join(os.path.dirname(__file__), f'{file_name}.txt')
 
 
 def load_from_file() -> list:
+    """ Функция загружает справочник из файла.
+
+    :return: Справочник контактов, <class 'list'>.
+    """
     path = file_path()
 
     with open(path, 'r', encoding='UTF-8') as file:
@@ -33,14 +47,24 @@ def load_from_file() -> list:
     return data
 
 
-def save_to_file(contact: list) -> None:
+def save_to_file(contacts: list) -> None:
+    """ Функция сохраняет справочник в файл.
+
+    :param contacts: Справочник, <class 'list'>.
+    :return: None
+    """
     path = file_path()
 
     with open(path, 'w', encoding='UTF-8') as file:
-        json.dump(contact, file, ensure_ascii=False)
+        json.dump(contacts, file, ensure_ascii=False)
 
 
 def show_on_screen(contacts: list) -> None:
+    """ Функция выводит переданные записи справочника на экран.
+
+    :param contacts: Записи справочника, <class 'list'>.
+    :return: None
+    """
     decode_keys = dict(
         first_name='Имя:',
         second_name='Фамилия:',
@@ -54,12 +78,12 @@ def show_on_screen(contacts: list) -> None:
     print(pretty_text)
 
 
-def create_contact_info():
-    pass
-
-
 def new_contact(contacts: list) -> None:
-    # Контактной информации может быть больше чем только телефон
+    """ Функция создает новую запись справочника.
+
+    :param contacts: Список записей справочника, <class 'list'>.
+    :return: None
+    """
     contacts.append(
         dict(
             first_name=input('Введите имя контакта:\n>>> '),
@@ -69,7 +93,11 @@ def new_contact(contacts: list) -> None:
     )
 
 
-def menu():
+def menu() -> int:
+    """ Функция реализует функционал "меню" программы.
+
+    :return: Индекс команды программы, <class 'int'>.
+    """
     commands = [
         'Показать все контакты',
         'Найти контакт',
@@ -95,6 +123,10 @@ def menu():
 
 
 def main() -> None:
+    """ Главная функция.
+
+    :return: None
+    """
     print('Программа запущена...')
     data = load_from_file()
 
@@ -108,31 +140,6 @@ def main() -> None:
 
     save_to_file(data)
     print('Конец программы!')
-
-
-def tests():
-    contact = dict(
-        first_name='Иван',
-        second_name='Иванов',
-        contacts='123'
-    )
-    contact2 = dict(
-        first_name='Петр',
-        second_name='Петров',
-        contacts='123'
-    )
-    contact3 = dict(
-        first_name='Петр',
-        second_name='Иванов',
-        contacts='123'
-    )
-    contact4 = dict(
-        first_name='Иван',
-        second_name='Петров',
-        contacts='123'
-    )
-    contacts = [contact, contact2, contact3, contact4]
-    return contacts
 
 
 if __name__ == '__main__':
