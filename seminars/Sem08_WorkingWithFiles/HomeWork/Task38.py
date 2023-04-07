@@ -48,7 +48,8 @@ def delete(handbook: list) -> None:
         print('Необходимо выбрать конкретную запись справочника. Продолжайте отбор')
         temp = find(temp)
     contact = temp[0]
-    print(f'Вы уверены, что хотите удалить запись:\n\tuuid: {contact["uuid"]}\n\tИмя: {contact["Имя"]}\n\tФамилия: {contact["Фамилия"]}')
+    print(f'Вы уверены, что хотите удалить запись:\n\tuuid: {contact["uuid"]}\n\tИмя: {contact["Имя"]}'
+          f'\n\tФамилия: {contact["Фамилия"]}')
     if input('>>> ').lower() in ['Yes'.lower(), 'Y'.lower(), 'Да'.lower(), 'Д'.lower()]:
         unique_identifier = handbook.pop(handbook.index(contact))['uuid']
         print(f'Запись с uuid: "{unique_identifier}"; была удалена.')
@@ -194,7 +195,7 @@ def get_predefined_fields(key: str) -> list:
     """ Функция хранит предопределенные имена полей справочника контактов.
 
     :param key: Имя группы полей, <class 'str'>.
-    :return: Список предопределенных полей справочника, <class 'lisst'>.
+    :return: Список предопределенных полей справочника, <class 'list'>.
     """
     predefined_fields = dict(
                              main_info=[
