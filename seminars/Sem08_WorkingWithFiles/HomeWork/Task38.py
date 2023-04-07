@@ -37,6 +37,11 @@ ENCODING = 'UTF-8'
 
 
 def delete(handbook: list) -> None:
+    """ Функция удаляет запись из справочника контактов.
+
+    :param handbook: Справочник контактов, <class 'list'>.
+    :return: None.
+    """
     print('Выберите запись для удаления.')
     temp = find(handbook)
     while not len(temp) == 1:
@@ -50,6 +55,11 @@ def delete(handbook: list) -> None:
 
 
 def update(handbook: list) -> None:
+    """ Функция отвечает за изменение значений полей записи справочника.
+
+    :param handbook: Справочник контактов, <class 'list'>.
+    :return: None.
+    """
     print('Выберите запись для изменения.')
     temp = find(handbook)
     while not len(temp) == 1:
@@ -82,22 +92,45 @@ def update(handbook: list) -> None:
 
 # Функция поиска единственного значения
 def find_one(handbook: list, unique_identifier: str) -> list:
+    """ Функция осуществляет поиск единственной записи по uuid записи.
+
+    :param handbook: Справочник контактов, <class 'list'>.
+    :param unique_identifier: UUID записи, <class 'str'>.
+    :return: Список с единственной найденной записи, <class 'list'>.
+    """
     found = list(filter(lambda el: el['uuid'] == unique_identifier, handbook))
     return found
 
 
-def get_entries(entity: dict, substrings: tuple):
+def get_entries(entity: dict, substrings: tuple) -> bool:
+    """ Вспомогательная функция поиска вхождений.
+
+    :param entity: Сущность, <class 'dict'>.
+    :param substrings: Подстроки поиска, <class 'tuple'>.
+    :return: Соответствие, <class 'bool'>.
+    """
     return set(entity.values()) > set(substrings)
 
 
 # Функция поиска одного или нескольких значений
 def find_entries(handbook: list, *args) -> list:
+    """ Функция ище вхождения подмножества подстрок в множество записи справочника контактов.
+
+    :param handbook: Справочник контактов, <class 'list'>.
+    :param args: Подстроки поиска, <class 'tuple'>.
+    :return: Список найденных записей, <class 'list'>.
+    """
     found = list(filter(lambda contact: get_entries(contact, args), handbook))
     return found
 
 
 # Управляющая функция поиска контактов
 def find(handbook: list) -> list:
+    """ Функция осуществляет поиск по записям справочника.
+
+    :param handbook: Справочник контактов, <class 'list'>.
+    :return: Список найденных записей, <class 'list'>.
+    """
     local_menu = ('1. Найти по uuid', '2. Найти по совпадению подстрок')
     print('Укажите номер способа поиска:\n', '\n'.join(local_menu), sep='')
     while choice := input('>>> '):
@@ -145,6 +178,11 @@ def find(handbook: list) -> list:
 
 
 def read(handbook: list) -> str:
+    """ Функция считывает переданные записи справочника и формирует строку вывода.
+
+    :param handbook: Справочник контактов, <class 'list'>.
+    :return: Строка записей справочника, <class 'str'>.
+    """
     contacts_str = ''
     for num, contact in enumerate(handbook, 1):
         contacts_str += f'Контакт №{num}:\n'
@@ -153,6 +191,11 @@ def read(handbook: list) -> str:
 
 
 def get_predefined_fields(key: str) -> list:
+    """ Функция хранит предопределенные имена полей справочника контактов.
+
+    :param key: Имя группы полей, <class 'str'>.
+    :return: Список предопределенных полей справочника, <class 'lisst'>.
+    """
     predefined_fields = dict(
                              main_info=[
                                         'Имя',
@@ -187,10 +230,18 @@ def get_predefined_fields(key: str) -> list:
 
 
 class KeyExistsError(Exception):
+    """ Класс отвечает за обработку ошибки существующего поля записи справочника.
+    """
     pass
 
 
-def add_new_fields(contact, fields_names):
+def add_new_fields(contact: dict, fields_names: list) -> None:
+    """ Функция добавляет новые поля к записи справочника.
+
+    :param contact: Запись справочника, <class 'dict'>.
+    :param fields_names: Предопределенные имена полей, <class 'list'>.
+    :return: None.
+    """
     local_menu = '\n'.join(f'{num}. {field_name}' for num, field_name in enumerate(fields_names, 1))
     print(f'Выберите имя поля по номеру:\n{local_menu}')
     while choice := input('>>> '):
@@ -221,6 +272,11 @@ def add_new_fields(contact, fields_names):
 
 
 def create(handbook: list) -> None:
+    """ Функция создает новую запись справочника контактов.
+
+    :param handbook: Справочник контактов, <class 'list'>.
+    :return: None.
+    """
     new_contact = dict()
 
     # Создание uuid для новой записи справочника
@@ -257,7 +313,7 @@ def create(handbook: list) -> None:
 
 
 def get_path_to_dump(dump_directory: str = 'dumps', file_name: str = 'phonebook', file_extension: str = 'txt') -> str:
-    """ Функция создает пустой файл дампа справочника.
+    """ Функция создает пустой файл дампа справочника и возвращает путь к файлу дампа.
 
     :param dump_directory: Папка для хранения дампа, <class' str'>.
     :param file_name: Имя файла дампа, <class' str'>.
@@ -301,6 +357,10 @@ def get_dump(path: str) -> list:
 
 
 def get_commands() -> dict:
+    """ Функция хранит в себе список команд программы и связанных с ними структур кода.
+
+    :return: Словарь команд реализованных в программе, <class 'dict'>.
+    """
     return {
             'Создать': create,
             'Найти': find,
@@ -312,6 +372,11 @@ def get_commands() -> dict:
 
 
 def menu(handbook: list) -> int:
+    """ Функция реализует функционал меню программы.
+
+    :param handbook: Справочник контактов, <class 'list'>.
+    :return: Возвращает статус работы программы, 0 - завершение, 1 - продолжение работы, <class 'int'>.
+    """
     commands = get_commands()
 
     numerated_list = list(enumerate(commands, 1))
@@ -340,7 +405,11 @@ def menu(handbook: list) -> int:
             return 0
 
 
-def main():
+def main() -> None:
+    """ Главная функция.
+
+    :return: None.
+    """
     path_to_dump = get_path_to_dump()
     handbook = get_dump(path_to_dump)
     while menu(handbook):

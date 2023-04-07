@@ -203,3 +203,4 @@ workspace.json
 # Media files
 *.mp4
 *.pdf
+*.txt
