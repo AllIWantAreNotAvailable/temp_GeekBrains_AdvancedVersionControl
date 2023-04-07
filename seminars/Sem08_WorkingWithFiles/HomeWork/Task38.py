@@ -68,12 +68,18 @@ def update(handbook: list) -> None:
         temp = find(temp)
     contact = temp[0]
     keys = [key for key in contact]
+    local_menu = ['1. Изменить значение полей записи', '2. Добавить поля записи']
     numerated_keys_values = lambda: '\n'.join(f'{num}. {key}: {contact[key]}' for num, key in enumerate(keys, 1))
-    print(f'Выберите номер поля для изменения:\n', numerated_keys_values(), sep='')
+    print('Выбранный контакт:',
+          numerated_keys_values(),
+          'Выберете номер команды:',
+          '\n'.join(command for command in local_menu),
+          sep='\n'
+          )
     while choice := input('>>> '):
         try:
-            key = int(choice) - 1
-            if key < 0 or len(keys) - 1 < key:
+            command_index = int(choice) - 1
+            if command_index < 0 or len(local_menu) - 1 < command_index:
                 raise IndexError
         except ValueError:
             print(f'Не удалось преобразовать "{choice}" к индексу команды. Повторите ввод.')
@@ -82,14 +88,46 @@ def update(handbook: list) -> None:
             print('Такой команды пока нет, повторите ввод.')
             continue
         else:
-            contact[keys[key]] = input(f'Введите новое значение поля "{keys[key]}":\n>>> ')
-            print('Хотите изменить еще одно поле?')
-            if input('>>> ').lower() in ['Yes'.lower(), 'Y'.lower(), 'Да'.lower(), 'Д'.lower()]:
+            if command_index == 0:
                 print(f'Выберите номер поля для изменения:\n', numerated_keys_values(), sep='')
-                continue
-            else:
-                return
+                while choice := input('>>> '):
+                    try:
+                        command_index = int(choice) - 1
+                        if command_index < 0 or len(keys) - 1 < command_index:
+                            raise IndexError
+                    except ValueError:
+                        print(f'Не удалось преобразовать "{choice}" к индексу команды. Повторите ввод.')
+                        continue
+                    except IndexError:
+                        print('Такой команды пока нет, повторите ввод.')
+                        continue
+                    else:
+                        contact[keys[command_index]] = input(f'Введите новое значение поля "{keys[command_index]}":'
+                                                             f'\n>>> ')
+                        print('Хотите изменить еще одно поле?')
+                        if input('>>> ').lower() in ['Yes'.lower(), 'Y'.lower(), 'Да'.lower(), 'Д'.lower()]:
+                            print(f'Выберите номер поля для изменения:\n', numerated_keys_values(), sep='')
+                            continue
+                        else:
+                            return
+            elif command_index == 1:
+                # Добавление дополнительной информации
+                while (input(f'Добавить дополнительную информацию о контакте?\n>>> ').lower()
+                       in ['Yes'.lower(), 'Y'.lower(), 'Да'.lower(), 'Д'.lower()]):
+                    keys = [*get_predefined_fields('other_information'), 'Пользовательское поле']
+                    add_new_fields(contact, keys)
 
+                # Добавление контактной информации
+                while (input(f'Добавить номер телефона контакту?\n>>> ').lower()
+                       in ['Yes'.lower(), 'Y'.lower(), 'Да'.lower(), 'Д'.lower()]):
+                    keys = [*get_predefined_fields('contact_information'), 'Пользовательское поле']
+                    add_new_fields(contact, keys)
+
+                while (input(f'Добавить адрес электронной почты контакту?\n>>> ').lower()
+                       in ['Yes'.lower(), 'Y'.lower(), 'Да'.lower(), 'Д'.lower()]):
+                    keys = [*get_predefined_fields('email_address'), 'Пользовательское поле']
+                    add_new_fields(contact, keys)
+                return
 
 # Функция поиска единственного значения
 def find_one(handbook: list, unique_identifier: str) -> list:
