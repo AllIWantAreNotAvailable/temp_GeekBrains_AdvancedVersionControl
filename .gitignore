@@ -187,6 +187,7 @@ fabric.properties
 # ===========================================
 # Test files
 test.py
+test.ipynb
 
 # DS_Store
 .DS_Store
