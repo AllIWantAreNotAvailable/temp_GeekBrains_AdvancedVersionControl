@@ -205,3 +205,5 @@ workspace.json
 *.mp4
 *.pdf
 *.txt
+*.json
+*.csv
