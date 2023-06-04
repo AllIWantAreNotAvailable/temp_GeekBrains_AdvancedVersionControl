@@ -14,3 +14,7 @@
 
 > ## Комментарии:
 > Зачем-то после revert я пушил изменения в репозиторий GitHub, отчего естественно нарвался на конфликт: "Updates were rejected because the tip of your current branch is behind its remote counterpart".
+
+# Задание от Кирилла.
+# Добавь свою подпись в README.md
+## muzkatttt группа 4336
